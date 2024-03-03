@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int countSubmatrices(vector<vector<int>>& grid, int k) {
+        int m = grid.size();
+        int n = grid[0].size();
+        int ans = 0;
+
+        vector<vector<int>> pref(m + 1, vector<int>(n + 1, 0));
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                int extra = pref[i - 1][j - 1];
+                pref[i][j] = grid[i - 1][j - 1] + pref[i][j-1] + pref[i-1][j] - extra;
+            }
+        }
+
+        for (int i = 1; i <= m; i++) 
+        {
+            for (int j = 1; j <= n; j++) 
+            {
+                int s = pref[i][j];
+                if (s <= k) 
+                {
+                    ans++;
+                }
+            }
+        }
+
+        return ans;
+    }
+};
