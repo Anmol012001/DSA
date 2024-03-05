@@ -1,0 +1,30 @@
+class Solution{
+    public:
+    bool subArrayExists(int arr[], int n)
+    {
+        unordered_map<int,int>mp;
+        int k=0;
+        mp[0]=1;
+        int count=0;
+        int sum=0;
+        for(int i=0;i<n;i++)
+        {
+            sum=sum+arr[i];
+            // int a=-1*sum;
+            
+            if(mp.find(sum-k)!=mp.end())
+            {
+                count = count+mp[sum-k];
+            }
+            mp[sum]++;
+        }
+        // cout<<count<<endl;
+        
+        if(count>0)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+};
