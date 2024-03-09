@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        s=s+" ";
+        int n=s.length();
+        string str,word;
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]!=' ')
+            {
+                str=s[i]+str;
+            }
+            else
+            {
+                word+=str+" ";
+                str="";
+            }
+        }
+        
+        return word.substr(0,n-1);
+    }
+};
