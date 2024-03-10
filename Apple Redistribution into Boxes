@@ -2,6 +2,7 @@ class Solution {
 public:
     int minimumBoxes(vector<int>& apple, vector<int>& capacity) {
         sort(capacity.begin(),capacity.end());
+        //Easy
         
         int sum=0;
         for(auto it:apple)
