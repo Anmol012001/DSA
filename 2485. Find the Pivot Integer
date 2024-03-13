@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int pivotInteger(int n) {
+        if(n==1)
+        {
+            return 1;
+        }
+        int sum=(n*(n+1))/2;
+        int pivot=-1;
+        int i=n;
+        int temp=n;
+        while(i>0)
+        { 
+            if(sum==temp)
+            {
+                pivot=i;
+                break;
+            }
+            temp=temp+i-1;
+            sum=sum-i;
+            i--;
+        }
+        return pivot;
+        
+    }
+};
