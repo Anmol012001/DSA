@@ -1,0 +1,47 @@
+class Solution {
+public:
+    int mod = 1e9+7; 
+
+    int rec(int idx, int f, vector<int> &a, vector<vector<int>> &dp) {
+        if (idx == a.size()) {
+            return f == 1;
+        }
+        if (dp[idx][f] != -1) 
+        {
+            return dp[idx][f];
+        }
+        
+        int ans = 0;
+        if (f == 0) 
+        { 
+            if (a[idx] == 1) 
+            {
+                ans = rec(idx + 1, 1, a, dp); 
+            } 
+            else 
+            {
+                ans = rec(idx + 1, 0, a, dp);
+            }
+        } 
+        else 
+        {
+            if (a[idx] == 0) 
+            {
+                ans = (rec(idx + 1, 1, a, dp) + rec(idx + 1, 0, a, dp)) % mod;
+            } 
+            else 
+            {
+                ans = rec(idx + 1, 1, a, dp);
+            }
+        }
+        
+        return dp[idx][f] = ans;
+    }
+    
+    int numberOfGoodSubarraySplits(vector<int>& nums) {
+        int n = nums.size();
+        vector<vector<int>>dp(n+1,vector<int>(2,-1));
+        
+        return rec(0, 0, nums, dp);
+    }
+};
