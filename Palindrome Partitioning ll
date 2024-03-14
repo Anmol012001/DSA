@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+bool isPalindrome(string S){
+    string P = S;
+    reverse(P.begin(), P.end());
+ 
+   
+    if (S == P) 
+    {
+        return true;
+    }
+   
+    return false;
+}
+void solve(vector<int>&ans, vector<string>&temp,string s)
+{
+    if(s.size() == 0)
+    {
+        ans.push_back(temp.size()-1);
+        return;
+    }
+    for(int j=0;j<s.size();j++)
+    {
+       string str = s.substr(0,j+1);
+        if(isPalindrome(str))
+        {
+            temp.push_back(str);
+            solve(ans,temp,s.substr(j+1));
+            temp.pop_back();
+        }
+    }
+}
+
+int palindromePartitioning(string str)
+{
+    vector<int>ans;
+    vector<string>temp;
+    solve(ans,temp,str);
+
+    sort(ans.begin(),ans.end());
+
+    return ans[0];
+}
