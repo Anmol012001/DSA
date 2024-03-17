@@ -1,0 +1,46 @@
+class Solution {
+public:
+    string minimizeStringValue(string s) {
+        
+        vector<int>count(26,0);
+        
+        string curr = "";
+        int n = s.length();
+        
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]>='a' && s[i]<='z')
+            {
+                count[s[i]-'a']++;
+            }
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]=='?')
+            {
+                auto mini = min_element(count.begin(), count.end());
+                int ind = distance(count.begin(), mini);
+                curr += ind + 'a';
+                count[ind]++;
+            }
+        }
+        sort(curr.begin(),curr.end());
+        
+        string ans = "";
+        
+        for(int i=0,j=0;i<n;i++)
+        {
+            if(s[i]=='?')
+            {
+                ans += curr[j];
+                j++;
+            }
+            else
+            {
+                ans+= s[i];
+            }
+        }
+        return ans;
+    }
+};
