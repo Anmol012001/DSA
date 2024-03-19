@@ -1,0 +1,46 @@
+class Solution {
+public:
+    vector<int> findOriginalArray(vector<int>& changed) 
+    {
+        vector<int>ans;
+        int n=changed.size();
+        if(n%2 != 0)
+        {
+            return ans;
+        }
+        unordered_map<int,int>mp;
+        sort(changed.begin(),changed.end());
+
+        for(auto it: changed)
+        {
+            mp[it]++;
+        }
+
+        for(int i=0;i<n;i++)
+        {
+            if(mp[changed[i]] >= 1)
+            {
+                if(mp.find(changed[i]*2)!=mp.end())
+                {
+                    ans.push_back(changed[i]);
+                    mp[changed[i]]--;
+                    mp[changed[i]*2]--;
+                }
+                else
+                {
+                    return {};
+                }
+            }
+            else
+            {
+                continue;
+            }
+        }
+
+        if(ans.size()!= n/2)
+        {
+            return {};
+        }
+        return ans;
+    }
+};
